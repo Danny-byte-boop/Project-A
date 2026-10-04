@@ -7,6 +7,7 @@ public class SoundManager : MonoBehaviour
 {
     [SerializeField] Slider volumeSlider;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+    //This if statement makes a reference of their preferences and stores it.
     void Start()
     {
         if (!PlayerPrefs.HasKey("musicVolume")) {
@@ -18,15 +19,18 @@ public class SoundManager : MonoBehaviour
             Load();
         }
     }
+    //This method, ChangeVolume() allows the player to move the volume slider.
     public void ChangeVolume()
     {
         AudioListener.volume = volumeSlider.value;
     }
+    //This method, Load(), saves the previous save and loads it in.
     private void Load()
     {
         volumeSlider.value = PlayerPrefs.GetFloat("musicVolume");
         Save();
     }
+    //This just saves the player preferences so next time you play the game it remembers :)
     private void Save()
     {
         PlayerPrefs.SetFloat("musicVolume" ,volumeSlider.value);
